@@ -5,7 +5,7 @@ const port = 3001;
 const app = new Application();
 
 app.get('/', async (ctx: Context) => {
-  ctx.json({ message: 'Hello world!'});
+  await ctx.file('public/index.html');
 });
 
 app.start({ port });
