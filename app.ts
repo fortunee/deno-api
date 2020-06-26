@@ -4,6 +4,8 @@ const port = 3001;
 
 const app = new Application();
 
+app.static('/', './public')
+
 app.get('/', async (ctx: Context) => {
   await ctx.file('public/index.html');
 });
