@@ -10,5 +10,11 @@ app.get('/', async (ctx: Context) => {
   await ctx.file('public/index.html');
 });
 
+app
+  .get('/books', async (ctx: Context) => console.log('getting all books...'))
+  .get('/book/:bookId', async(ctx: Context) => console.log('getting a single book...'))
+  .post('/book', async(ctx: Context) => console.log('Adding a book...'))
+  .put('/book/:bookId', async (ctx: Context) => console.log('Updating a book...'))
+
 app.start({ port });
 console.log(`listening on port ${port}`);
