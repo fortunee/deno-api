@@ -1,4 +1,6 @@
 import { Context } from 'https://deno.land/x/abc@v1.0.0-rc10/mod.ts';
+import ShortUniqueId from 'https://cdn.jsdelivr.net/npm/short-unique-id@latest/short_uuid/mod.ts';
+
 import { Book } from '../models/book.model.ts';
 
 let books: Book[] = [
@@ -17,6 +19,8 @@ let books: Book[] = [
   },
 ];
 
+const uid = new ShortUniqueId()
+
 export const getBooks = async (ctx: Context) => ctx.json(books, 200);
 
 export const getBook = async (ctx: Context) => {
@@ -31,17 +35,17 @@ export const getBook = async (ctx: Context) => {
 };
 
 export const createBook = async (ctx: Context) => {
-  const { title, numOfPages } = await ctx.body();
-  const id = 'some random generated id';
+  const { title, author, numOfPages } = await ctx.body();
+  const id = uid();
 
   // @todo perform some data validations :wink:
-  const book = { id, title, numOfPages };
+  const book = { id, title, author, numOfPages };
   return ctx.json(book, 201);
 };
 
 export const updateBook = async (ctx: Context) => {
   const { id } = ctx.params;
-  const { title, numOfPages } = await ctx.body();
+  const { title, author, numOfPages } = await ctx.body();
 
   const book = books.find((b: Book) => (b.id = id));
   if (!book) {
@@ -49,6 +53,7 @@ export const updateBook = async (ctx: Context) => {
   }
 
   book.title = title ?? book.title;
+  book.author = author ?? book.author;
   book.numOfPages = numOfPages ?? book.numOfPages;
   return ctx.json(book, 200);
 };
