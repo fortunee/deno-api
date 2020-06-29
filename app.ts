@@ -11,10 +11,11 @@ app.get('/', async (ctx: Context) => {
 });
 
 app
-  .get('/books', async (ctx: Context) => console.log('getting all books...'))
-  .get('/book/:bookId', async(ctx: Context) => console.log('getting a single book...'))
-  .post('/book', async(ctx: Context) => console.log('Adding a book...'))
-  .put('/book/:bookId', async (ctx: Context) => console.log('Updating a book...'))
+  .get('/books', async (ctx: Context) => ctx.string('getting all books...'))
+  .get('/books/:id', async(ctx: Context) => ctx.string('getting a single book...'))
+  .post('/books', async(ctx: Context) => ctx.string('Adding a book...'))
+  .put('/books/:id', async (ctx: Context) => ctx.string('Updating a book...'))
+  .delete('/books/:id', async (ctx: Context) => ctx.string('Updating a book...'))
 
 app.start({ port });
 console.log(`listening on port ${port}`);
