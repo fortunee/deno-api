@@ -1,12 +1,21 @@
 import { Context } from 'https://deno.land/x/abc@v1.0.0-rc10/mod.ts';
+import { Book } from '../models/book.model.ts';
 
-interface Book {
-  id: number | string;
-  title: string;
-  numOfPages: number;
-}
-
-let books: Book[] = [];
+let books: Book[] = [
+  { id: 1, title: 'Clean Code', author: 'Uncle Bob', numOfPages: 500 },
+  {
+    id: 2,
+    title: 'On Writing Well',
+    author: 'William Zinsser',
+    numOfPages: 290,
+  },
+  {
+    id: 3,
+    title: 'The Good & Beautiful God',
+    author: 'James Bryan Smith',
+    numOfPages: 430,
+  },
+];
 
 export const getBooks = async (ctx: Context) => ctx.json(books, 200);
 
