@@ -62,6 +62,5 @@ export const updateBook = async (ctx: Context) => {
 export const deleteBook = async (ctx: Context) => {
   const { id } = ctx.params;
   books = books.filter((b: Book) => b.id != id);
-  console.log({ id, books })
   return ctx.json(books, 200);
 };
